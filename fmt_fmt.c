@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 02:51:31 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/12/27 17:18:04 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/01/02 17:08:10 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,23 @@
 static void	fmt_int_sign(t_vect *a, t_u32 base, t_i64 x)
 {
 	char	s[20];
+	int		neg;
 	size_t	i;
 
 	i = 19;
-	while ((x < 0 || x <= base) && (x > 0 || x <= - base))
+	neg = (x < 0);
+	while (x)
 	{
-		printf("x = %ld", x);
 		s[i] = ABS(x % base);
-		printf("\ts[%lu] = %d", i, s[i]);
 		s[i] += (s[i] <= 9) ? '0' : 'a' - 10;
-		printf("\t = %c\n", s[i]);
 		x /= base;
 		i--;
 	}
-	s[i] = ABS(x);
-	s[i] += (s[i] <= 9) ? '0' : 'a' - 10;
+	if (neg)
+		s[i--] = '-';
+	if (i == 19)
+		s[i--] = '0';
+	i++;
 	vect_add(a, s + i, 20 - i);
 }
 
@@ -55,15 +57,12 @@ static void	fmt_int(t_vect *a, char **d, size_t *n, va_list l)
 {
 	char	*s;
 	int		sign;
-	t_i64	i64;
 	t_u32	base;
-	t_u64	u64;
 
 	sign = 0;
 	base = 0;
 	if (**d == '-')
 	{
-		i64 = va_arg(l, t_i64);
 		(*d)++;
 		(*n)--;
 		sign = 1;
@@ -71,13 +70,8 @@ static void	fmt_int(t_vect *a, char **d, size_t *n, va_list l)
 	s = STRTOB10(*d, base);
 	*n -= s - *d;
 	*d = s;
-	if (sign)
-		fmt_int_sign(a, base, i64);
-	else
-	{
-		u64 = va_arg(l, t_u64);
-		fmt_int_unsign(a, base, u64);
-	}
+	sign ? fmt_int_sign(a, base, va_arg(l, t_i64))
+		: fmt_int_unsign(a, base, va_arg(l, t_u64));
 }
 
 static void	fmt(t_vect *a, char **d, size_t *n, va_list l)
