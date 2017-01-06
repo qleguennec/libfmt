@@ -6,12 +6,13 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 02:51:31 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/01/02 17:08:10 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/01/03 18:00:29 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfmt.h"
 #include <stdio.h>
+#include <limits.h>
 
 static void	fmt_int_sign(t_vect *a, t_u32 base, t_i64 x)
 {
@@ -23,7 +24,7 @@ static void	fmt_int_sign(t_vect *a, t_u32 base, t_i64 x)
 	neg = (x < 0);
 	while (x)
 	{
-		s[i] = ABS(x % base);
+		s[i] = ABS((t_i64)(x % base));
 		s[i] += (s[i] <= 9) ? '0' : 'a' - 10;
 		x /= base;
 		i--;
