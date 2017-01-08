@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 02:51:31 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/01/03 18:00:29 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/01/08 23:43:20 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,76 @@
 #include <stdio.h>
 #include <limits.h>
 
-static void	fmt_int_sign(t_vect *a, t_u32 base, t_i64 x)
+static void
+	fmt_int_sign_64
+	(t_vect *a
+	, t_i32 base
+	, t_i64 x)
 {
+	bool	neg;
 	char	s[20];
-	int		neg;
 	size_t	i;
 
 	i = 19;
 	neg = (x < 0);
-	while (x)
+	if (!x)
+		return ((void)vect_mset_end(a, '0', 1));
+	while ((x > 0 || x <= base) && ((x < 0) || (x >= base)))
 	{
-		s[i] = ABS((t_i64)(x % base));
+		s[i] = x % base;
+		s[i] = ABS(s[i]);
 		s[i] += (s[i] <= 9) ? '0' : 'a' - 10;
 		x /= base;
 		i--;
 	}
+	if (x)
+		s[i--] = ABS(x) + (x <= 9 ? '0' : 'a' - 10);
 	if (neg)
 		s[i--] = '-';
-	if (i == 19)
-		s[i--] = '0';
 	i++;
 	vect_add(a, s + i, 20 - i);
 }
 
-static void	fmt_int_unsign(t_vect *a, t_u32 base, t_u64 x)
+static void
+	fmt_int_sign_32
+	(t_vect *a
+	, t_i32 base
+	, t_i32 x)
 {
-	char	s[19];
+	bool	neg;
+	char	s[11];
 	size_t	i;
 
-	i = 18;
+	i = 10;
+	neg = (x < 0);
+	if (!x)
+		return ((void)vect_mset_end(a, '0', 1));
+	while ((x > 0 || x <= base) && ((x < 0) || (x >= base)))
+	{
+		s[i] = x % base;
+		s[i] = ABS(s[i]);
+		s[i] += (s[i] <= 9) ? '0' : 'a' - 10;
+		x /= base;
+		i--;
+	}
+	if (x)
+		s[i--] = ABS(x) + (x <= 9 ? '0' : 'a' - 10);
+	if (neg)
+		s[i--] = '-';
+	i++;
+	vect_add(a, s + i, 11 - i);
+}
+
+static void
+	fmt_int_unsign
+	(t_vect *a
+	, t_u32 base
+	, t_u64 x)
+{
+	char	s[21];
+	size_t	i;
+
+	i = 20;
 	while (x >= base)
 	{
 		s[i] = x % base;
@@ -50,18 +91,27 @@ static void	fmt_int_unsign(t_vect *a, t_u32 base, t_u64 x)
 		x /= base;
 		i--;
 	}
-	s[i] = x + (x <= 9 ? '0' : 'a' - 10);
-	vect_add(a, s + i, 19 - i);
+	if (x)
+		s[i--] = x + (x <= 9 ? '0' : 'a' - 10);
+	i++;
+	vect_add(a, s + i, 21 - i);
 }
 
-static void	fmt_int(t_vect *a, char **d, size_t *n, va_list l)
+static void
+	fmt_int
+	(t_vect *a
+	, char **d
+	, size_t *n
+	, va_list l)
 {
 	char	*s;
 	int		sign;
-	t_u32	base;
+	t_u64	base;
+	t_u64	bytes;
 
 	sign = 0;
 	base = 0;
+	bytes = 0;
 	if (**d == '-')
 	{
 		(*d)++;
@@ -69,13 +119,23 @@ static void	fmt_int(t_vect *a, char **d, size_t *n, va_list l)
 		sign = 1;
 	}
 	s = STRTOB10(*d, base);
+	if (*s == '/')
+		s = STRTOB10(++s, bytes);
 	*n -= s - *d;
 	*d = s;
-	sign ? fmt_int_sign(a, base, va_arg(l, t_i64))
-		: fmt_int_unsign(a, base, va_arg(l, t_u64));
+	if (sign)
+		bytes == 4 ? fmt_int_sign_32(a, base, va_arg(l, t_i32))
+			: fmt_int_sign_64(a, base, va_arg(l, t_i64));
+	else
+		fmt_int_unsign(a, base, va_arg(l, t_u64));
 }
 
-static void	fmt(t_vect *a, char **d, size_t *n, va_list l)
+static void
+	fmt
+	(t_vect *a
+	, char **d
+	, size_t *n
+	, va_list l)
 {
 	t_vect	*b;
 	void	*p;
@@ -94,7 +154,12 @@ static void	fmt(t_vect *a, char **d, size_t *n, va_list l)
 	(*n)--;
 }
 
-void		fmt_fmt(t_vect *a, char *s, size_t n, va_list l)
+void
+	fmt_fmt
+	(t_vect *a
+	, char *s
+	, size_t n
+	, va_list l)
 {
 	char	*d;
 
