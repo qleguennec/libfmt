@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 02:51:31 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/01/09 15:23:10 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:04:15 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,10 @@ static void
 	, size_t *n
 	, va_list l)
 {
-	t_vect	*b;
-	void	*p;
+	t_vect	*v;
 
 	if (**d == '-' || ft_isdigit(**d))
 		return (fmt_int(a, d, n, l));
-	p = va_arg(l, void *);
-	if (**d == 's')
-		vect_str_add(a, p);
-	else if (**d == 'v')
-	{
-		b = p;
-		vect_add(a, b->data, b->used);
-	}
 	else if (**d == 'a')
 		fmt_int_sign_32(a, 10, va_arg(l, t_i32));
 	else if (**d == 'b')
@@ -40,6 +31,13 @@ static void
 		fmt_int_unsign(a, 10, va_arg(l, t_i32));
 	else if (**d == '%')
 		vect_mset_end(a, '%', 1);
+	if (**d == 's')
+		vect_str_add(a, va_arg(l, char *));
+	else if (**d == 'v')
+	{
+		v = va_arg(l, t_vect *);
+		vect_add(a, v->data, v->used);
+	}
 	(*d)++;
 	(*n)--;
 }
