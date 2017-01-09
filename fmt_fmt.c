@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 02:51:31 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/01/08 23:43:20 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/01/09 00:02:56 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,14 @@ static void
 		b = p;
 		vect_add(a, b->data, b->used);
 	}
+	else if (**d == 'a')
+		fmt_int_sign_32(a, 10, va_arg(l, t_i32));
+	else if (**d == 'b')
+		fmt_int_sign_64(a, 10, va_arg(l, t_i32));
+	else if (**d == 'c' || **d == 'd')
+		fmt_int_unsign(a, 10, va_arg(l, t_i32));
+	else if (**d == '%')
+		vect_mset_end(a, '%', 1);
 	(*d)++;
 	(*n)--;
 }

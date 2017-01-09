@@ -9,3 +9,9 @@ Final version will include:
 Example from printf usual format conversions:
 - _%d_ for %-10/4
 - _%u_ for %10/4
+
+aliases:
+- _%a_ => %-10/4
+- _%b_ => %-10/8
+- _%c_ => %10/4
+- _%d_ => %10/8
