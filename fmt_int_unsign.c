@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:23:48 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/01/09 15:26:51 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/01/10 15:51:58 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void
 	size_t	i;
 
 	i = 20;
+	if (!x)
+		return ((void)vect_mset_end(a, '0', 1));
 	while (x >= base)
 	{
 		s[i] = x % base;

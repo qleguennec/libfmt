@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 02:52:19 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/01/09 15:26:11 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/01/10 15:50:32 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 # define PRINT(s, ...)	fmt_print(1, 0, s, sizeof(s) - 1, __VA_ARGS__)
 # define ECHO(s, ...)	fmt_print(1, 0, s "\n", sizeof(s), __VA_ARGS__)
 # define ERR(s, r, ...)	fmt_print(2, r, s "\n", sizeof(s), __VA_ARGS__)
+
+# ifdef T_U32_V2_ECHO
+#  define ECHO2_U32(a) ECHO("V2(%c, %c)",a.x,a.y)
+# endif
+
+# ifdef T_U32_V4_ECHO
+#  define ECHO4_U32(x) ECHO("V4(%c, %c, %c, %c)",x.a,x.b,x.c,x.d)
+# endif
 
 int			fmt_print(int fd, int ret, char *s, size_t n, ...);
 void		fmt_fmt(t_vect *a, char *s, size_t n, va_list l);
