@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 02:52:19 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/01/14 19:01:15 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/01/16 11:11:06 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include "../libft/malloc.h"
 # include "../libvect/libvect.h"
 
-# define ECHO(s, ...)	fmt_print(1, 0, s "\n", sizeof(s), __VA_ARGS__)
+# define ECHO(s, ...)	fmt_print(1, 1, s "\n", sizeof(s), __VA_ARGS__)
 # define ERR(s, r, ...)	fmt_print(2, r, s "\n", sizeof(s), __VA_ARGS__)
-# define PRINT(s, ...)	fmt_print(1, 0, s, sizeof(s) - 1, __VA_ARGS__)
-# define PUT(s)			fmt_print(1, 0, s, sizeof(s) - 1)
+# define PRINT(s, ...)	fmt_print(1, 1, s, sizeof(s) - 1, __VA_ARGS__)
+# define PUT(s)			fmt_print(1, 1, s, sizeof(s) - 1)
+# define PUTNL(s)		fmt_print(1, 1, s "\n", sizeof(s))
 
 # define ECHO_U32(a) ECHO("%c", a)
 
