@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 02:52:19 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/01/16 11:11:06 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/01/17 12:26:18 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@
 # define PUT(s)			fmt_print(1, 1, s, sizeof(s) - 1)
 # define PUTNL(s)		fmt_print(1, 1, s "\n", sizeof(s))
 
+# define ECHO_I32(a) ECHO("%a", a)
 # define ECHO_U32(a) ECHO("%c", a)
+
+# ifdef T_I32_V2_ECHO
+#  define ECHO2_I32(a) ECHO("V2(%a, %a)",(a).x,(a).y)
+# endif
 
 # ifdef T_U32_V2_ECHO
 #  define ECHO2_U32(a) ECHO("V2(%c, %c)",(a).x,(a).y)
