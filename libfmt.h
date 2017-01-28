@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 02:52:19 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/01/17 12:26:18 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/01/28 15:49:38 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 
 # define ECHO_I32(a) ECHO("%a", a)
 # define ECHO_U32(a) ECHO("%c", a)
+
+# define ECHO_ARR_I32(l, a)	ECHO("*a", l, a)
+# define VECHO_I32(v)		ECHO("*a", (v).used / sizeof(t_i32), (v).data)
 
 # ifdef T_I32_V2_ECHO
 #  define ECHO2_I32(a) ECHO("V2(%a, %a)",(a).x,(a).y)
