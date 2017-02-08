@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 02:52:19 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/01/28 15:49:38 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/02/08 10:18:39 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # define PUT(s)			fmt_print(1, 1, s, sizeof(s) - 1)
 # define PUTNL(s)		fmt_print(1, 1, s "\n", sizeof(s))
 
+# define FMT_VECT(v, s, ...) fmt_vect(v, s, sizeof(s) - 1, __VA_ARGS__)
+
+# define VECHO(v) ECHO("%v", v)
 # define ECHO_I32(a) ECHO("%a", a)
 # define ECHO_U32(a) ECHO("%c", a)
 
@@ -44,8 +47,9 @@
 int			fmt_print(int fd, int ret, char *s, size_t n, ...);
 void		fmt_fmt(t_vect *a, char *s, size_t n, va_list l);
 void		fmt_int(t_vect *a, char **d, size_t *n, va_list l);
-void		fmt_int_unsign(t_vect *a, t_u32 base, t_u64 x);
 void		fmt_int_sign_32(t_vect *a, t_i32 base, t_i32 x);
 void		fmt_int_sign_64(t_vect *a, t_i32 base, t_i64 x);
+void		fmt_int_unsign(t_vect *a, t_u32 base, t_u64 x);
+void		fmt_vect(t_vect *a, char *s, size_t n, ...);
 
 #endif
