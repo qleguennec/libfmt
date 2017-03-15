@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 02:51:31 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/02/08 10:27:19 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/03/15 14:22:49 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,23 @@ static void
 	, va_list l)
 {
 	t_vect	*v;
+	char	*s;
 
 	if (**d == '-' || ft_isdigit(**d))
 		return (fmt_int(a, d, n, l));
 	else if (**d == 'a')
-		fmt_int_sign_32(a, 10, va_arg(l, t_i32));
+		fmt_int_sign_32(a, 10, va_arg(l, int));
 	else if (**d == 'b')
-		fmt_int_sign_64(a, 10, va_arg(l, t_i64));
+		fmt_int_sign_64(a, 10, va_arg(l, long));
 	else if (**d == 'c' || **d == 'd')
-		fmt_int_unsign(a, 10, va_arg(l, t_u64));
+		fmt_int_unsign(a, 10, va_arg(l, unsigned long));
 	else if (**d == '%')
 		VECT_STRADD(a, "%");
 	if (**d == 's')
-		vect_str_add(a, va_arg(l, char *));
+	{
+		s = va_arg(l, char *);
+		vect_add(a, s, ft_strlen(s));
+	}
 	else if (**d == 'v')
 	{
 		v = va_arg(l, t_vect *);
@@ -59,8 +63,8 @@ static void
 	{
 		if (**d == 'a')
 		{
-			fmt_int_sign_32(a, 10, *(t_i32 *)arr);
-			arr += sizeof(t_i32);
+			fmt_int_sign_32(a, 10, *(int *)arr);
+			arr += sizeof(int);
 		}
 		arr_len--;
 		if (arr_len)
@@ -80,7 +84,8 @@ void
 {
 	char	*d;
 
-	if (!((d = ft_memchr(s, '%', n)) || (d = ft_memchr(s, '*', n))))
+	if (!((d = ft_memchr(s, '%', n))
+		|| (d = ft_memchr(s, '*', n))))
 	{
 		vect_add(a, s, n);
 		return ;

@@ -15,8 +15,8 @@
 void
 	fmt_int_sign_64
 	(t_vect *a
-	, t_i32 base
-	, t_i64 x)
+	, int base
+	, long x)
 {
 	bool	neg;
 	char	s[20];

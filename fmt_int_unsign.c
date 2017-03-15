@@ -15,8 +15,8 @@
 void
 	fmt_int_unsign
 	(t_vect *a
-	, t_u32 base
-	, t_u64 x)
+	, unsigned base
+	, unsigned long x)
 {
 	char	s[21];
 	size_t	i;

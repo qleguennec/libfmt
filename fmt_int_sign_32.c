@@ -15,8 +15,8 @@
 void
 	fmt_int_sign_32
 	(t_vect *a
-	, t_i32 base
-	, t_i32 x)
+	, int base
+	, int x)
 {
 	bool	neg;
 	char	s[11];

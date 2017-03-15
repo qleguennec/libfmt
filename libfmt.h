@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 02:52:19 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/02/08 10:18:39 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/03/15 14:17:00 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include "../libft/malloc.h"
 # include "../libvect/libvect.h"
+# include <stdarg.h>
 
 # define ECHO(s, ...)	fmt_print(1, 1, s "\n", sizeof(s), __VA_ARGS__)
 # define ERR(s, r, ...)	fmt_print(2, r, s "\n", sizeof(s), __VA_ARGS__)
@@ -30,7 +31,7 @@
 # define ECHO_U32(a) ECHO("%c", a)
 
 # define ECHO_ARR_I32(l, a)	ECHO("*a", l, a)
-# define VECHO_I32(v)		ECHO("*a", (v).used / sizeof(t_i32), (v).data)
+# define VECHO_I32(v)		ECHO("*a", (v).used / sizeof(int), (v).data)
 
 # ifdef T_I32_V2_ECHO
 #  define ECHO2_I32(a) ECHO("V2(%a, %a)",(a).x,(a).y)
@@ -47,9 +48,9 @@
 int			fmt_print(int fd, int ret, char *s, size_t n, ...);
 void		fmt_fmt(t_vect *a, char *s, size_t n, va_list l);
 void		fmt_int(t_vect *a, char **d, size_t *n, va_list l);
-void		fmt_int_sign_32(t_vect *a, t_i32 base, t_i32 x);
-void		fmt_int_sign_64(t_vect *a, t_i32 base, t_i64 x);
-void		fmt_int_unsign(t_vect *a, t_u32 base, t_u64 x);
+void		fmt_int_sign_32(t_vect *a, int base, int x);
+void		fmt_int_sign_64(t_vect *a, int base, long x);
+void		fmt_int_unsign(t_vect *a, unsigned base, unsigned long x);
 void		fmt_vect(t_vect *a, char *s, size_t n, ...);
 
 #endif

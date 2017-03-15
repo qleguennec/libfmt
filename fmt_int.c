@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:20:51 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/01/09 15:37:29 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/03/15 14:21:43 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void
 	, size_t *n
 	, va_list l)
 {
-	char	*s;
-	int		sign;
-	t_u64	base;
-	t_u64	bytes;
+	char			*s;
+	int				sign;
+	unsigned long	base;
+	unsigned long	bytes;
 
 	sign = 0;
 	base = 0;
@@ -39,8 +39,8 @@ void
 	*n -= s - *d;
 	*d = s;
 	if (sign)
-		bytes == 4 ? fmt_int_sign_32(a, base, va_arg(l, t_i32))
-			: fmt_int_sign_64(a, base, va_arg(l, t_i64));
+		bytes == 4 ? fmt_int_sign_32(a, base, va_arg(l, int))
+			: fmt_int_sign_64(a, base, va_arg(l, long));
 	else
-		fmt_int_unsign(a, base, va_arg(l, t_u64));
+		fmt_int_unsign(a, base, va_arg(l, unsigned long));
 }
