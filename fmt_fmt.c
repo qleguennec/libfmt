@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 02:51:31 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/03/15 14:22:49 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/03/15 15:00:10 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static void
 		fmt_int_sign_32(a, 10, va_arg(l, int));
 	else if (**d == 'b')
 		fmt_int_sign_64(a, 10, va_arg(l, long));
-	else if (**d == 'c' || **d == 'd')
+	else if (**d == 'd')
 		fmt_int_unsign(a, 10, va_arg(l, unsigned long));
-	else if (**d == '%')
-		VECT_STRADD(a, "%");
+	else if (**d == 'c')
+		vect_mset_end(a, va_arg(l, int), 1);
 	if (**d == 's')
 	{
 		s = va_arg(l, char *);
