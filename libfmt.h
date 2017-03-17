@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 02:52:19 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/03/15 14:17:00 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/03/17 16:09:12 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define PUT(s)			fmt_print(1, 1, s, sizeof(s) - 1)
 # define PUTNL(s)		fmt_print(1, 1, s "\n", sizeof(s))
 
-# define FMT_VECT(v, s, ...) fmt_vect(v, s, sizeof(s) - 1, __VA_ARGS__)
+# define VFMT(v, s, ...) fmt_vect(v, s, sizeof(s) - 1, __VA_ARGS__)
 
 # define VECHO(v) ECHO("%v", v)
 # define ECHO_I32(a) ECHO("%a", a)
