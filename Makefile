@@ -1,5 +1,5 @@
 NAME = libfmt.a
-SRC = $(filter %.c, $(shell ls))
+SRC = fmt_fmt.c fmt_int.c fmt_int_sign_32.c fmt_int_sign_64.c fmt_int_unsign.c fmt_print.c fmt_vect.c
 OBJ = $(SRC:.c=.o)
 
 CFLAGS += -g -Wall -Wextra -Werror

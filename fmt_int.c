@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 15:20:51 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/03/15 14:21:43 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/05/29 02:44:05 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void
 		(*n)--;
 		sign = 1;
 	}
-	s = STRTOB10(*d, base);
+	s = ft_atoi(*d, &base, 10, 0);
 	if (*s == '/')
-		s = STRTOB10(++s, bytes);
+		s = ft_atoi(s++, &bytes, 10, 0);
 	*n -= s - *d;
 	*d = s;
 	if (sign)

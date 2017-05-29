@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/23 02:51:31 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/03/15 15:00:10 by qle-guen         ###   ########.fr       */
+/*   Updated: 2017/05/29 02:41:50 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void
 
 	arr_len = va_arg(l, size_t);
 	arr = va_arg(l, void *);
-	VECT_STRADD(a, "{");
+	vect_add(a, "{", 1);
 	while (arr_len)
 	{
 		if (**d == 'a')
@@ -68,9 +68,9 @@ static void
 		}
 		arr_len--;
 		if (arr_len)
-			VECT_STRADD(a, ", ");
+			vect_add(a, ", ", 2);
 	}
-	VECT_STRADD(a, "}");
+	vect_add(a, "}", 1);
 	(*d)++;
 	(*n)--;
 }
