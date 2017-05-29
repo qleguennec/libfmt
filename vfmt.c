@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fmt_print.c                                        :+:      :+:    :+:   */
+/*   vfmt.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/26 15:51:03 by qle-guen          #+#    #+#             */
-/*   Updated: 2017/05/29 04:23:01 by qle-guen         ###   ########.fr       */
+/*   Created: 2017/05/29 04:17:06 by qle-guen          #+#    #+#             */
+/*   Updated: 2017/05/29 04:23:14 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfmt.h"
 
-int		fmt_print(int fd, int ret, char *s, size_t n, ...)
+int
+	vfmt
+	(int ret
+		, t_vect *v
+		, char *s
+		, ...)
 {
-	t_vect	a;
+
 	va_list	l;
 
-	va_start(l, n);
-	vect_init(&a);
-	a.malloc_err_f = &fmt_err;
-	fmt_fmt(&a, s, n, l);
-	write(fd, a.data, a.used);
-	free(a.data);
+	va_start(l, s);
+	fmt_fmt(v, s, ft_strlen(s), l);
 	va_end(l);
 	return (ret);
 }
